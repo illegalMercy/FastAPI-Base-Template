@@ -1,0 +1,36 @@
+services:
+  fastapi:
+    container_name: fastapi-dev
+    build: .
+    environment:
+      APP__DEBUG: TRUE
+      APP__UVICORN__HOST: 0.0.0.0
+      APP__UVICORN__PORT: 8000
+      APP__POSTGRES__URL: postgresql+asyncpg://user:password@localhost:5432/db_name
+
+    command: ./.venv/bin/python ./src/main.py
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./src:/app/src
+    networks:
+      - backend
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: db_name
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:

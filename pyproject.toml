@@ -1,0 +1,19 @@
+[project]
+name = "FastAPIBaseTemplate"
+version = "0.1.0"
+description = "FastAPI Base Template"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "alembic>=1.15.2",
+    "asyncpg>=0.30.0",
+    "fastapi>=0.115.12",
+    "pydantic-settings>=2.9.1",
+    "sqlalchemy[asyncio]>=2.0.40",
+    "uvicorn>=0.34.2",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.9",
+]
